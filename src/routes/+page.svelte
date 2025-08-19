@@ -183,7 +183,15 @@
 </script>
 
 <div class="controls">
-  <input type="file" accept="image/*" on:change={handleFileUpload} />
+  <label for="file">
+    Upload
+    <input
+      type="file"
+      accept="image/*"
+      on:change={handleFileUpload}
+      id="file"
+    />
+  </label>
 
   <label for="direction">
     Direction:
@@ -246,23 +254,48 @@
   <button on:click={resetImage} disabled={!originalImg}>Reset</button>
 </div>
 
-<canvas bind:this={canvasEl} class="border mt-2"></canvas>
+<canvas bind:this={canvasEl} class={originalImg ? "" : "hide"}></canvas>
 
 <style>
   .controls {
-    width: 100%;
+    padding: 0.8rem;
+    max-width: max-content;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
+    justify-content: center;
+    border: 1px solid white;
+    border-radius: 3px;
+    position: sticky;
+    top: 1rem;
+    background: black;
+  }
+  button {
+    width: 3.5rem;
   }
   canvas {
-    max-width: 100%;
+    display: block;
+    margin: auto;
+    max-width: calc(100% - 32px);
     border: 1px solid #ccc;
+  }
+  canvas.hide {
+    display: none;
   }
   label {
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
+  }
+  label[for="file"] {
+    background: white;
+    color: black;
+    padding: 0.8rem;
+    display: grid;
+    place-items: center;
+  }
+  input#file {
+    display: none;
   }
 </style>
